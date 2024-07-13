@@ -11,7 +11,7 @@ if(isset($_POST['login'])){
 	}else{
 		$password=md5($password);
 
-		//$checking=$conn->query("Select * from hospitals where userId='".$username."' and userPass='".$password."'");
+		//$checking=$conn->query("Select * from games where userId='".$username."' and userPass='".$password."'");
 
 		if($stmt=$conn->query("SELECT * from users where userId='$username' and userPass='$password'")){
 			if($stmt->num_rows>0){
@@ -36,14 +36,14 @@ if(isset($_POST['reg'])){
 	$username=scan($_POST['userId']);
 	$password=scan($_POST['userPass']);
 	$email=scan($_POST['userEmail']);
-	$hospital=scan($_POST['hospital']);
+	$game=scan($_POST['game']);
 
-	if(empty($username) || empty($password) || empty($email) || empty($hospital) ){
+	if(empty($username) || empty($password) || empty($email) || empty($game) ){
 		die("please fill in with all your identification");
 	}else{
 		$password=md5($password);
-		$stmt=$conn->prepare("INSERT into users (hospital,email,userId,userPass) VALUES(?,?,?,?)");
-		if($stmt->bind_param("ssss",$hospital,$email,$username,$password)){
+		$stmt=$conn->prepare("INSERT into users (game,email,userId,userPass) VALUES(?,?,?,?)");
+		if($stmt->bind_param("ssss",$game,$email,$username,$password)){
 			$stmt->execute();
 			echo "done";
 		}else{
